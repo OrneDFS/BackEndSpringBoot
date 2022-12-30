@@ -1,84 +1,105 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.portfolioback.OrneDesFS.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.persistence.OneToOne;
 
-/**
- *
- * @author ornel
- */
+
 @Entity
-@Table(name = "persona")
-@XmlRootElement
-@NamedQueries({
+/*@Table(name = "persona")*/
+
+/*@NamedQueries({
     @NamedQuery(name = "Persona.findAll", query = "SELECT p FROM Persona p"),
-    @NamedQuery(name = "Persona.findByIdPersona", query = "SELECT p FROM Persona p WHERE p.idPersona = :idPersona"),
+    @NamedQuery(name = "Persona.findById", query = "SELECT p FROM Persona p WHERE p.id = :id"),
     @NamedQuery(name = "Persona.findByNombre", query = "SELECT p FROM Persona p WHERE p.nombre = :nombre"),
     @NamedQuery(name = "Persona.findByApellido", query = "SELECT p FROM Persona p WHERE p.apellido = :apellido"),
-    @NamedQuery(name = "Persona.findByDescripci\u00f3n", query = "SELECT p FROM Persona p WHERE p.descripci\u00f3n = :descripci\u00f3n"),
+    @NamedQuery(name = "Persona.findByDescripcion", query = "SELECT p FROM Persona p WHERE p.descripcion = :descripcion"),
     @NamedQuery(name = "Persona.findByWhatsApp", query = "SELECT p FROM Persona p WHERE p.whatsApp = :whatsApp"),
     @NamedQuery(name = "Persona.findByCorreo", query = "SELECT p FROM Persona p WHERE p.correo = :correo"),
     @NamedQuery(name = "Persona.findByLugardeResidencia", query = "SELECT p FROM Persona p WHERE p.lugardeResidencia = :lugardeResidencia"),
-    @NamedQuery(name = "Persona.findByUrlImg", query = "SELECT p FROM Persona p WHERE p.urlImg = :urlImg")})
+    @NamedQuery(name = "Persona.findByUrlImg", query = "SELECT p FROM Persona p WHERE p.urlImg = :urlImg")})*/
 public class Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "idPersona")
-    private Integer idPersona;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Basic (optional=false)
+    @Column(name = "id")
+    private Integer id;
     @Column(name = "Nombre")
     private String nombre;
     @Column(name = "Apellido")
     private String apellido;
-    @Column(name = "Descripci\u00f3n")
-    private String descripción;
+    @Column(name = "Descripcion") 
+    private String descripcion;
     @Column(name = "WhatsApp")
     private String whatsApp;
     @Column(name = "Correo")
     private String correo;
-    @Column(name = "Lugar de Residencia")
+    @Column(name = "Lugar_de_Residencia")
     private String lugardeResidencia;
     @Column(name = "Url_Img")
     private String urlImg;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
-    private Collection<Usuario> usuarioCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+   
+    @OneToOne(mappedBy = "persona")
+    @JsonIgnoreProperties(value="Persona")
+    private Usuario usuario;
+    
+    @OneToMany(mappedBy = "persona")
+    @JsonIgnoreProperties(value="Persona")
     private Collection<Proyectos> proyectosCollection;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "persona")
+    
+    @OneToMany(mappedBy = "persona")
+    @JsonIgnoreProperties(value="Persona")
     private Collection<RedesSociales> redesSocialesCollection;
+    
+    @OneToMany(mappedBy = "persona")
+    @JsonIgnoreProperties(value="Persona")
+    private Collection<Estudios> estudiosCollection;
+    
+    @OneToMany(mappedBy = "persona")
+    @JsonIgnoreProperties(value="Persona")
+    private Collection<Habilidades> habilidadesCollection;
+    
+    @OneToMany(mappedBy = "persona")
+    @JsonIgnoreProperties(value="Persona")
+    private Collection<Trabajos> trabajosCollection;
 
     public Persona() {
     }
 
-    public Persona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public Persona(Integer id, String nombre, String apellido, String descripcion, String whatsApp, String correo, String lugardeResidencia, String urlImg, Usuario usuario, Collection<Proyectos> proyectosCollection, Collection<RedesSociales> redesSocialesCollection, Collection<Estudios> estudiosCollection, Collection<Habilidades> habilidadesCollection, Collection<Trabajos> trabajosCollection) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.descripcion = descripcion;
+        this.whatsApp = whatsApp;
+        this.correo = correo;
+        this.lugardeResidencia = lugardeResidencia;
+        this.urlImg = urlImg;
+        this.usuario = usuario;
+        this.proyectosCollection = proyectosCollection;
+        this.redesSocialesCollection = redesSocialesCollection;
+        this.estudiosCollection = estudiosCollection;
+        this.habilidadesCollection = habilidadesCollection;
+        this.trabajosCollection = trabajosCollection;
     }
 
-    public Integer getIdPersona() {
-        return idPersona;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdPersona(Integer idPersona) {
-        this.idPersona = idPersona;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getNombre() {
@@ -97,12 +118,12 @@ public class Persona implements Serializable {
         this.apellido = apellido;
     }
 
-    public String getDescripción() {
-        return descripción;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripción(String descripción) {
-        this.descripción = descripción;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getWhatsApp() {
@@ -137,16 +158,14 @@ public class Persona implements Serializable {
         this.urlImg = urlImg;
     }
 
-    @XmlTransient
-    public Collection<Usuario> getUsuarioCollection() {
-        return usuarioCollection;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setUsuarioCollection(Collection<Usuario> usuarioCollection) {
-        this.usuarioCollection = usuarioCollection;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
-    @XmlTransient
     public Collection<Proyectos> getProyectosCollection() {
         return proyectosCollection;
     }
@@ -155,7 +174,6 @@ public class Persona implements Serializable {
         this.proyectosCollection = proyectosCollection;
     }
 
-    @XmlTransient
     public Collection<RedesSociales> getRedesSocialesCollection() {
         return redesSocialesCollection;
     }
@@ -164,29 +182,31 @@ public class Persona implements Serializable {
         this.redesSocialesCollection = redesSocialesCollection;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idPersona != null ? idPersona.hashCode() : 0);
-        return hash;
+    public Collection<Estudios> getEstudiosCollection() {
+        return estudiosCollection;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Persona)) {
-            return false;
-        }
-        Persona other = (Persona) object;
-        if ((this.idPersona == null && other.idPersona != null) || (this.idPersona != null && !this.idPersona.equals(other.idPersona))) {
-            return false;
-        }
-        return true;
+    public void setEstudiosCollection(Collection<Estudios> estudiosCollection) {
+        this.estudiosCollection = estudiosCollection;
     }
 
-    @Override
-    public String toString() {
-        return "com.portfolioback.OrneDesFS.model.Persona[ idPersona=" + idPersona + " ]";
+    public Collection<Habilidades> getHabilidadesCollection() {
+        return habilidadesCollection;
+    }
+
+    public void setHabilidadesCollection(Collection<Habilidades> habilidadesCollection) {
+        this.habilidadesCollection = habilidadesCollection;
+    }
+
+    public Collection<Trabajos> getTrabajosCollection() {
+        return trabajosCollection;
+    }
+
+    public void setTrabajosCollection(Collection<Trabajos> trabajosCollection) {
+        this.trabajosCollection = trabajosCollection;
     }
     
+
+
+
 }

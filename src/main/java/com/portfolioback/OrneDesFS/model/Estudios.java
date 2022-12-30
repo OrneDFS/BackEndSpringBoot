@@ -1,75 +1,84 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.portfolioback.OrneDesFS.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author ornel
- */
+
+
 @Entity
 @Table(name = "estudios")
-@XmlRootElement
-@NamedQueries({
+
+/*@NamedQueries({
     @NamedQuery(name = "Estudios.findAll", query = "SELECT e FROM Estudios e"),
-    @NamedQuery(name = "Estudios.findByIdEstudios", query = "SELECT e FROM Estudios e WHERE e.estudiosPK.idEstudios = :idEstudios"),
-    @NamedQuery(name = "Estudios.findByInstituci\u00f3n", query = "SELECT e FROM Estudios e WHERE e.instituci\u00f3n = :instituci\u00f3n"),
+    @NamedQuery(name = "Estudios.findByInstitucion", query = "SELECT e FROM Estudios e WHERE e.institucion = :institucion"),
     @NamedQuery(name = "Estudios.findByPeriodo", query = "SELECT e FROM Estudios e WHERE e.periodo = :periodo"),
-    @NamedQuery(name = "Estudios.findByT\u00edtulo", query = "SELECT e FROM Estudios e WHERE e.t\u00edtulo = :t\u00edtulo"),
-    @NamedQuery(name = "Estudios.findByDescripci\u00f3n", query = "SELECT e FROM Estudios e WHERE e.descripci\u00f3n = :descripci\u00f3n"),
+    @NamedQuery(name = "Estudios.findByTitulo", query = "SELECT e FROM Estudios e WHERE e.titulo = :titulo"),
+    @NamedQuery(name = "Estudios.findByDescripcion", query = "SELECT e FROM Estudios e WHERE e.descripcion = :descripcion"),
     @NamedQuery(name = "Estudios.findByEnlace", query = "SELECT e FROM Estudios e WHERE e.enlace = :enlace"),
-    @NamedQuery(name = "Estudios.findByPersonaidPersona", query = "SELECT e FROM Estudios e WHERE e.estudiosPK.personaidPersona = :personaidPersona")})
+})*/
+
 public class Estudios implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected EstudiosPK estudiosPK;
-    @Column(name = "Instituci\u00f3n")
-    private String institución;
+
+    @Id
+    @Basic(optional=false)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @Column(name="id")
+    private Integer id;
+        
+    @Column(name = "Institucion")
+    private String institucion;
     @Column(name = "Periodo")
     private String periodo;
-    @Column(name = "T\u00edtulo")
-    private String título;
-    @Column(name = "Descripci\u00f3n")
-    private String descripción;
+    @Column(name = "Titulo")
+    private String titulo;
+    @Column(name = "Descripcion")
+    private String descripcion;
     @Column(name = "Enlace")
     private String enlace;
+    @JoinColumn(name = "persona_id_persona", referencedColumnName = "id")
+    @ManyToOne
+    @JsonIgnoreProperties(value={"estudiosCollection", "proyectosCollection", "redesSocialesCollection", "habilidadesCollection", "trabajosCollection"})
+    private Persona persona;
 
     public Estudios() {
     }
 
-    public Estudios(EstudiosPK estudiosPK) {
-        this.estudiosPK = estudiosPK;
+    public Estudios(Integer id, String institucion, String periodo, String titulo, String descripcion, String enlace, Persona persona) {
+        this.id = id;
+        this.institucion = institucion;
+        this.periodo = periodo;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.enlace = enlace;
+        this.persona = persona;
     }
 
-    public Estudios(int idEstudios, int personaidPersona) {
-        this.estudiosPK = new EstudiosPK(idEstudios, personaidPersona);
+    public Integer getId() {
+        return id;
     }
 
-    public EstudiosPK getEstudiosPK() {
-        return estudiosPK;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setEstudiosPK(EstudiosPK estudiosPK) {
-        this.estudiosPK = estudiosPK;
+    public String getInstitucion() {
+        return institucion;
     }
 
-    public String getInstitución() {
-        return institución;
-    }
-
-    public void setInstitución(String institución) {
-        this.institución = institución;
+    public void setInstitucion(String institucion) {
+        this.institucion = institucion;
     }
 
     public String getPeriodo() {
@@ -80,20 +89,20 @@ public class Estudios implements Serializable {
         this.periodo = periodo;
     }
 
-    public String getTítulo() {
-        return título;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setTítulo(String título) {
-        this.título = título;
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public String getDescripción() {
-        return descripción;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripción(String descripción) {
-        this.descripción = descripción;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getEnlace() {
@@ -104,29 +113,17 @@ public class Estudios implements Serializable {
         this.enlace = enlace;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (estudiosPK != null ? estudiosPK.hashCode() : 0);
-        return hash;
+    public Persona getPersona() {
+        return persona;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Estudios)) {
-            return false;
-        }
-        Estudios other = (Estudios) object;
-        if ((this.estudiosPK == null && other.estudiosPK != null) || (this.estudiosPK != null && !this.estudiosPK.equals(other.estudiosPK))) {
-            return false;
-        }
-        return true;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
-    @Override
-    public String toString() {
-        return "com.portfolioback.OrneDesFS.model.Estudios[ estudiosPK=" + estudiosPK + " ]";
-    }
+    
+
+    
+    
     
 }

@@ -1,61 +1,66 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.portfolioback.OrneDesFS.model;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- *
- * @author ornel
- */
+
+
 @Entity
 @Table(name = "trabajos")
-@XmlRootElement
-@NamedQueries({
+/*@NamedQueries({
     @NamedQuery(name = "Trabajos.findAll", query = "SELECT t FROM Trabajos t"),
     @NamedQuery(name = "Trabajos.findByIdTrabajos", query = "SELECT t FROM Trabajos t WHERE t.idTrabajos = :idTrabajos"),
-    @NamedQuery(name = "Trabajos.findByPersonaidPersona", query = "SELECT t FROM Trabajos t WHERE t.personaidPersona = :personaidPersona")})
+    @NamedQuery(name = "Trabajos.findByPersona_idPersona", query = "SELECT t FROM Trabajos t WHERE t.persona_idPersona = :persona_idPersona")})*/
 public class Trabajos implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
+    @GeneratedValue(strategy=GenerationType.SEQUENCE)
     @Column(name = "idTrabajos")
     private Integer idTrabajos;
-    @Lob
+    
     @Column(name = "Empresa")
     private String empresa;
-    @Lob
+    
     @Column(name = "Periodo")
     private String periodo;
-    @Lob
+    
     @Column(name = "Puesto")
     private String puesto;
-    @Lob
-    @Column(name = "Descripci\u00c3\u00b3n")
-    private String descripciÃn;
-    @Lob
+    
+    @Column(name = "Descripcion")
+    private String descripcion;
+    
     @Column(name = "Url_empresa")
     private String urlempresa;
-    @Column(name = "Persona_idPersona")
-    private Integer personaidPersona;
+    
+    @JoinColumn(name = "persona_idPersona", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Persona persona;
 
     public Trabajos() {
     }
 
-    public Trabajos(Integer idTrabajos) {
+    public Trabajos(Integer idTrabajos, String empresa, String periodo, String puesto, String descripcion, String urlempresa, Persona persona) {
         this.idTrabajos = idTrabajos;
+        this.empresa = empresa;
+        this.periodo = periodo;
+        this.puesto = puesto;
+        this.descripcion = descripcion;
+        this.urlempresa = urlempresa;
+        this.persona = persona;
     }
 
     public Integer getIdTrabajos() {
@@ -90,12 +95,12 @@ public class Trabajos implements Serializable {
         this.puesto = puesto;
     }
 
-    public String getDescripciÃn() {
-        return descripciÃn;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescripciÃn(String descripciÃn) {
-        this.descripciÃn = descripciÃn;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getUrlempresa() {
@@ -106,37 +111,15 @@ public class Trabajos implements Serializable {
         this.urlempresa = urlempresa;
     }
 
-    public Integer getPersonaidPersona() {
-        return personaidPersona;
+    public Persona getPersona() {
+        return persona;
     }
 
-    public void setPersonaidPersona(Integer personaidPersona) {
-        this.personaidPersona = personaidPersona;
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idTrabajos != null ? idTrabajos.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Trabajos)) {
-            return false;
-        }
-        Trabajos other = (Trabajos) object;
-        if ((this.idTrabajos == null && other.idTrabajos != null) || (this.idTrabajos != null && !this.idTrabajos.equals(other.idTrabajos))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "com.portfolioback.OrneDesFS.model.Trabajos[ idTrabajos=" + idTrabajos + " ]";
-    }
+    
+    
     
 }
