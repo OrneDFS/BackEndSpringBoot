@@ -1,6 +1,7 @@
 
 package com.portfolioback.OrneDesFS.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -10,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
@@ -37,25 +36,34 @@ public class Proyectos implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     @Column(name="id")
     private Integer id;
-    
     @Column(name = "Titulo")
     private String titulo;
     @Column(name = "Descripcion")
     private String descripcion;
     @Column(name = "Url_Proy")
     private String urlProy;
-    @JoinColumn(name = "persona_idPersona", referencedColumnName = "id")
+    @JoinColumn(name = "persona_id_Persona", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnoreProperties(value={"estudiosCollection", "proyectosCollection", "redesSocialesCollection", "habilidadesCollection", "trabajosCollection"})
     private Persona persona;
 
     public Proyectos() {
     }
 
-    public Proyectos(String titulo, String descripcion, String urlProy, Persona persona) {
+    public Proyectos(Integer id, String titulo, String descripcion, String urlProy, Persona persona) {
+        this.id= id;
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.urlProy = urlProy;
         this.persona = persona;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitulo() {

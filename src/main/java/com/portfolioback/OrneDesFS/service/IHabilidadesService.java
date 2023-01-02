@@ -8,7 +8,7 @@ import java.util.List;
 public interface IHabilidadesService {
     
    
-    public void nuevaHabilidad(Habilidades habi); // habilidad o habi?
+    public void nuevaHabilidad(Habilidades habi);
     public Habilidades verHabilidad (int id);
     public void editarHabilidad (Habilidades habi);
     public void eliminarHabilidad (int id);

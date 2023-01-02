@@ -1,6 +1,7 @@
 
 package com.portfolioback.OrneDesFS.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -30,11 +31,11 @@ public class RedesSociales implements Serializable {
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     @Column(name="id")
     private Integer id;
-    
     @Column(name = "redSocial")
     private String redSocial;
-    @JoinColumn(name = "persona_idPersona", referencedColumnName = "id")
+    @JoinColumn(name = "persona_id_Persona", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnoreProperties(value={"estudiosCollection", "proyectosCollection", "redesSocialesCollection", "habilidadesCollection", "trabajosCollection"})
     private Persona persona;
 
     public RedesSociales() {
