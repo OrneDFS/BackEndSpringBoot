@@ -1,5 +1,6 @@
 package com.portfolioback.OrneDesFS.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -9,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
@@ -39,14 +38,16 @@ public class Habilidades implements Serializable {
     private String descripcion;
     @Column(name = "URL_Video")
     private String uRLVideo;
-    @JoinColumn(name = "persona_idPersona", referencedColumnName = "id")
+    @JoinColumn(name = "persona_id_persona", referencedColumnName = "id")
     @ManyToOne(optional = false)
+    @JsonIgnoreProperties(value={"estudiosCollection", "proyectosCollection", "redesSocialesCollection", "habilidadesCollection", "trabajosCollection"})
     private Persona persona;
 
-        public Habilidades(Integer id, String descripcion, String uRLVideo) {
+        public Habilidades(Integer id, String descripcion, String uRLVideo, Persona persona ) {
         this.id = id;
         this.descripcion = descripcion;
         this.uRLVideo = uRLVideo;
+        this.persona = persona;
     }
 
     public Habilidades() {
@@ -74,6 +75,14 @@ public class Habilidades implements Serializable {
 
     public void setuRLVideo(String uRLVideo) {
         this.uRLVideo = uRLVideo;
+    }
+
+    public Persona getPersona() {
+        return persona;
+    }
+
+    public void setPersona(Persona persona) {
+        this.persona = persona;
     }
         
         
