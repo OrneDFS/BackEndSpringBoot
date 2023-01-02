@@ -1,6 +1,7 @@
 
 package com.portfolioback.OrneDesFS.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -10,8 +11,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
@@ -27,7 +26,7 @@ public class Trabajos implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name = "idTrabajos")
     private Integer idTrabajos;
     
@@ -46,8 +45,10 @@ public class Trabajos implements Serializable {
     @Column(name = "Url_empresa")
     private String urlempresa;
     
-    @JoinColumn(name = "persona_idPersona", referencedColumnName = "id")
+    @JoinColumn(name = "persona_id_Persona", referencedColumnName = "id")
+    
     @ManyToOne(optional = false)
+    @JsonIgnoreProperties(value={"estudiosCollection", "proyectosCollection", "redesSocialesCollection", "habilidadesCollection", "trabajosCollection"})
     private Persona persona;
 
     public Trabajos() {

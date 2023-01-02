@@ -28,7 +28,7 @@ public class RedesSociales implements Serializable {
 
     @Id
     @Basic(optional=false)
-    @GeneratedValue(strategy=GenerationType.SEQUENCE)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     @Column(name="id")
     private Integer id;
     @Column(name = "redSocial")
