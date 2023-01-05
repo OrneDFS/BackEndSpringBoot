@@ -48,7 +48,7 @@ public class Estudios implements Serializable {
     @Column(name = "Enlace")
     private String enlace;
     @JoinColumn(name = "persona_id_persona", referencedColumnName = "id")
-    @ManyToOne
+    @ManyToOne (optional = false)
     @JsonIgnoreProperties(value={"estudiosCollection", "proyectosCollection", "redesSocialesCollection", "habilidadesCollection", "trabajosCollection"})
     private Persona persona;
 
