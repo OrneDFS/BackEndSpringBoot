@@ -5,6 +5,7 @@ import com.portfolioback.OrneDesFS.model.Persona;
 import com.portfolioback.OrneDesFS.service.IPersonaService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,22 +23,23 @@ public class PersonaController {
     @Autowired
     private IPersonaService instancPersoServ;
     
-    @PostMapping("/persona/agregar") 
-    public void nuevaPersona (@RequestBody Persona per){//pers o per?
-        instancPersoServ.nuevaPersona(per);
-    }
-    
-    @GetMapping("/persona/ver/{id}")
+        @GetMapping("/persona/ver/{id}")
     public Persona verPersona(@PathVariable int id){
         return instancPersoServ.verPersona(id);
     }
     
-    
+    @PreAuthorize("hasRole('Admin')")
+    @PostMapping("/persona/agregar") 
+    public void nuevaPersona (@RequestBody Persona per){//pers o per?
+        instancPersoServ.nuevaPersona(per);
+    }   
+  
+    @PreAuthorize("hasRole('Admin')")
     @PutMapping ("/persona/editar") 
     public void editarPersona(@RequestBody Persona pers){ //pers o per?
         instancPersoServ.editarPersona(pers);
     }
-    
+    @PreAuthorize("hasRole('Admin')")
     @DeleteMapping ("/persona/eliminar/{id}") 
     public void eliminarPersona (@PathVariable int id){
         instancPersoServ.eliminarPersona(id);

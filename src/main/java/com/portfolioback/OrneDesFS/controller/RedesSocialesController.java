@@ -5,6 +5,7 @@ import com.portfolioback.OrneDesFS.model.RedesSociales;
 import com.portfolioback.OrneDesFS.service.IRedesSocialesService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,7 @@ public class RedesSocialesController {
     @Autowired
     private IRedesSocialesService instancRSocServ;
     
+    @PreAuthorize("hasRole('Admin')")
     @PostMapping("/redes_sociales/agregar") 
     public void nuevaRedSocial (@RequestBody RedesSociales rSoc){
         instancRSocServ.nuevaRedSocial(rSoc);
@@ -33,12 +35,12 @@ public class RedesSocialesController {
     public RedesSociales verRedSocial(@PathVariable int id){
         return instancRSocServ.verRedSocial(id);
     }
-              
+    @PreAuthorize("hasRole('Admin')")          
     @PutMapping ("/redes_sociales/editar") 
     public void editarRedSocial(@RequestBody RedesSociales rSoc){
         instancRSocServ.editarRedSocial(rSoc);
     }
-        
+    @PreAuthorize("hasRole('Admin')")    
     @DeleteMapping ("/redes_sociales/eliminar/{id}") 
     public void eliminarRedSocial (@PathVariable int id){
         instancRSocServ.eliminarRedSocial(id);

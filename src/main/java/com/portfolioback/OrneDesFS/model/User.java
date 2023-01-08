@@ -1,4 +1,4 @@
-
+/*
 package com.portfolioback.OrneDesFS.model;
 
 import java.io.Serializable;
@@ -18,11 +18,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "usuario")
 /*@NamedQueries({
-    @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
-    @NamedQuery(name = "Usuario.findByUsuario", query = "SELECT u FROM Usuario u WHERE u.usuario = :usuario"),
-    @NamedQuery(name = "Usuario.findByPassword", query = "SELECT u FROM Usuario u WHERE u.password = :password"),
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+    @NamedQuery(name = "User.findByUsuario", query = "SELECT u FROM User u WHERE u.usuario = :usuario"),
+    @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password"),
     })*/
-public class Usuario implements Serializable {
+/*public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -36,10 +36,10 @@ public class Usuario implements Serializable {
     @OneToOne(optional = false)
     private Persona persona;
 
-    public Usuario() {
+    public User() {
     }
 
-    public Usuario(int id, String usuario, String password, Persona persona) {
+    public User(int id, String usuario, String password, Persona persona) {
         this.id = id;
         this.usuario = usuario;
         this.password = password;
@@ -81,3 +81,4 @@ public class Usuario implements Serializable {
     
     
 }
+*/

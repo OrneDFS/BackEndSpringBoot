@@ -7,8 +7,8 @@
     <class>com.portfolioback.OrneDesFS.model.Persona</class>
     <class>com.portfolioback.OrneDesFS.model.Estudios</class>
     <class>com.portfolioback.OrneDesFS.model.RedesSociales</class>
-    <class>com.portfolioback.OrneDesFS.model.Usuario</class>
     <class>com.portfolioback.OrneDesFS.model.Trabajos</class>
+    <class>com.portfolioback.OrneDesFS.model.User</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3308/mi_portafoliov2?useSSL=false&amp;serverTimezone=UTC"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

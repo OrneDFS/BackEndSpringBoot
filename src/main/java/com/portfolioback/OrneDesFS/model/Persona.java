@@ -50,9 +50,9 @@ public class Persona implements Serializable {
     @Column(name = "Url_Img")
     private String urlImg;
    
-    @OneToOne(mappedBy = "persona")
-    @JsonIgnoreProperties(value="Persona")
-    private Usuario usuario;
+    //@OneToOne(mappedBy = "persona")
+    //@JsonIgnoreProperties(value="Persona")
+    //private User usuario;
     
     @OneToMany(mappedBy = "persona")
     @JsonIgnoreProperties(value="Persona")
@@ -77,7 +77,7 @@ public class Persona implements Serializable {
     public Persona() {
     }
 
-    public Persona(Integer id, String nombre, String apellido, String descripcion, String whatsApp, String correo, String lugardeResidencia, String urlImg, Usuario usuario, Collection<Proyectos> proyectosCollection, Collection<RedesSociales> redesSocialesCollection, Collection<Estudios> estudiosCollection, Collection<Habilidades> habilidadesCollection, Collection<Trabajos> trabajosCollection) {
+    public Persona(Integer id, String nombre, String apellido, String descripcion, String whatsApp, String correo, String lugardeResidencia, String urlImg, Collection<Proyectos> proyectosCollection, Collection<RedesSociales> redesSocialesCollection, Collection<Estudios> estudiosCollection, Collection<Habilidades> habilidadesCollection, Collection<Trabajos> trabajosCollection) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -86,7 +86,7 @@ public class Persona implements Serializable {
         this.correo = correo;
         this.lugardeResidencia = lugardeResidencia;
         this.urlImg = urlImg;
-        this.usuario = usuario;
+        //this.usuario = usuario;
         this.proyectosCollection = proyectosCollection;
         this.redesSocialesCollection = redesSocialesCollection;
         this.estudiosCollection = estudiosCollection;
@@ -158,13 +158,13 @@ public class Persona implements Serializable {
         this.urlImg = urlImg;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
+    //public User getUsuario() {
+    //    return usuario;
+    //}
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+    //public void setUsuario(User usuario) {
+    //    this.usuario = usuario;
+    //}
 
     public Collection<Proyectos> getProyectosCollection() {
         return proyectosCollection;

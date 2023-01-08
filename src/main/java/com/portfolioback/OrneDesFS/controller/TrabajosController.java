@@ -5,6 +5,7 @@ import com.portfolioback.OrneDesFS.model.Trabajos;
 import com.portfolioback.OrneDesFS.service.ITrabajosService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,7 @@ public class TrabajosController {
     
     @Autowired
     private ITrabajosService instancTrabServ;
-    
+    @PreAuthorize("hasRole('Admin')")
     @PostMapping("/trabajos/agregar") 
     public void nuevoTrabajo (@RequestBody Trabajos trab){
         instancTrabServ.nuevoTrabajo(trab);
@@ -31,12 +32,12 @@ public class TrabajosController {
     public Trabajos verTrabajo(@PathVariable int id){
         return instancTrabServ.verTrabajo(id);
     }
-
+    @PreAuthorize("hasRole('Admin')")
     @PutMapping ("/trabajos/editar") 
     public void editarTrabajo(@RequestBody Trabajos trab){
         instancTrabServ.editarTrabajo(trab);
     }
-    
+    @PreAuthorize("hasRole('Admin')")
     @DeleteMapping ("/trabajos/eliminar/{id}") 
     public void eliminarTrabajo (@PathVariable int id){
         instancTrabServ.eliminarTrabajo(id);

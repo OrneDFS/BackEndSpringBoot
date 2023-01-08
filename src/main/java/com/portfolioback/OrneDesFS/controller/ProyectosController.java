@@ -5,6 +5,7 @@ import com.portfolioback.OrneDesFS.model.Proyectos;
 import com.portfolioback.OrneDesFS.service.IProyectosService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class ProyectosController {
     @Autowired
     private IProyectosService instancProyServ;
             
-    
+    @PreAuthorize("hasRole('Admin')")
     @PostMapping("/proyectos/agregar") 
     public void nuevoProyecto (@RequestBody Proyectos proye){
         instancProyServ.nuevoProyecto(proye);
@@ -32,13 +33,13 @@ public class ProyectosController {
     public Proyectos verProyecto(@PathVariable int id){
         return instancProyServ.verProyecto(id);
     }
-    
+    @PreAuthorize("hasRole('Admin')")
     @PutMapping ("/proyectos/editar") 
     public void editarProyecto(@RequestBody Proyectos proye){
         instancProyServ.editarProyecto(proye);
     }
     
-        
+    @PreAuthorize("hasRole('Admin')")    
     @DeleteMapping ("/proyectos/eliminar/{id}") 
     public void eliminarProyecto (@PathVariable int id){
         instancProyServ.eliminarProyecto(id);

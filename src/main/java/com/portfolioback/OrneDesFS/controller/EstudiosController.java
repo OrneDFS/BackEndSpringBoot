@@ -5,6 +5,7 @@ import com.portfolioback.OrneDesFS.model.Estudios;
 import com.portfolioback.OrneDesFS.service.IEstudiosService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ public class EstudiosController {
     @Autowired
     private IEstudiosService instancEstuServ;
     
+    @PreAuthorize("hasRole('Admin')")
     @PostMapping("/estudios/agregar") // modificar agregar postman y personaService!!!
     public void nuevoEstudio (@RequestBody Estudios est){
         instancEstuServ.nuevoEstudio(est);
@@ -31,12 +33,12 @@ public class EstudiosController {
     public Estudios verEstudio(@PathVariable int id){
         return instancEstuServ.verEstudio(id);
     }
-    
+    @PreAuthorize("hasRole('Admin')")
     @PutMapping ("/estudios/editar") 
     public void editarEstudio(@RequestBody Estudios est){
         instancEstuServ.editarEstudio(est);
     }
-    
+    @PreAuthorize("hasRole('Admin')")
     @DeleteMapping ("/estudios/eliminar/{id}") 
     public void eliminarEstudio (@PathVariable int id){
         instancEstuServ.eliminarEstudio(id);
