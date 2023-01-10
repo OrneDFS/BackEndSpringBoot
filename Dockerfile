@@ -1,7 +1,7 @@
 
 
 
-FROM FROM openjdk:8
+FROM FROM openjdk:8-jdk-alpine
 MAINTAINER OrneDesFS
 COPY target/OrneDesFS-0.0.1-SNAPSHOT.jar OrneDesFS-0.0.1-SNAPSHOT.jar
 ENTRYPOINT ["java","-jar","/OrneDesFS-0.0.1-SNAPSHOT.jar"]
