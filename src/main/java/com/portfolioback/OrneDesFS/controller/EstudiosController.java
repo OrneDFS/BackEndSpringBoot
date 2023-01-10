@@ -23,7 +23,7 @@ public class EstudiosController {
     @Autowired
     private IEstudiosService instancEstuServ;
     
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/estudios/agregar") // modificar agregar postman y personaService!!!
     public void nuevoEstudio (@RequestBody Estudios est){
         instancEstuServ.nuevoEstudio(est);
@@ -33,12 +33,12 @@ public class EstudiosController {
     public Estudios verEstudio(@PathVariable int id){
         return instancEstuServ.verEstudio(id);
     }
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/estudios/editar") 
     public void editarEstudio(@RequestBody Estudios est){
         instancEstuServ.editarEstudio(est);
     }
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/estudios/eliminar/{id}") 
     public void eliminarEstudio (@PathVariable int id){
         instancEstuServ.eliminarEstudio(id);

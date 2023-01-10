@@ -23,7 +23,7 @@ public class HabilidadesController {
     @Autowired
     private IHabilidadesService instancHabiServ;
     
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/habilidades/agregar") // modificar agregar postman y personaService!!!
     public void nuevaHabilidad (@RequestBody Habilidades habi){
         instancHabiServ.nuevaHabilidad(habi);
@@ -33,12 +33,12 @@ public class HabilidadesController {
     public Habilidades verHabilidad(@PathVariable int id){
         return instancHabiServ.verHabilidad(id);
     }
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/habilidades/editar") 
     public void editarHabilidad(@RequestBody Habilidades habi){
         instancHabiServ.editarHabilidad(habi);
     }
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/habilidades/eliminar/{id}") 
     public void eliminarHabilidad (@PathVariable int id){
         instancHabiServ.eliminarHabilidad(id);

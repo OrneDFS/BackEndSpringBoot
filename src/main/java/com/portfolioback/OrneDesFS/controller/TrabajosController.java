@@ -22,7 +22,7 @@ public class TrabajosController {
     
     @Autowired
     private ITrabajosService instancTrabServ;
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/trabajos/agregar") 
     public void nuevoTrabajo (@RequestBody Trabajos trab){
         instancTrabServ.nuevoTrabajo(trab);
@@ -32,12 +32,12 @@ public class TrabajosController {
     public Trabajos verTrabajo(@PathVariable int id){
         return instancTrabServ.verTrabajo(id);
     }
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/trabajos/editar") 
     public void editarTrabajo(@RequestBody Trabajos trab){
         instancTrabServ.editarTrabajo(trab);
     }
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/trabajos/eliminar/{id}") 
     public void eliminarTrabajo (@PathVariable int id){
         instancTrabServ.eliminarTrabajo(id);

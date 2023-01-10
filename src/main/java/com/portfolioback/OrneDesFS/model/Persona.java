@@ -86,7 +86,6 @@ public class Persona implements Serializable {
         this.correo = correo;
         this.lugardeResidencia = lugardeResidencia;
         this.urlImg = urlImg;
-        //this.usuario = usuario;
         this.proyectosCollection = proyectosCollection;
         this.redesSocialesCollection = redesSocialesCollection;
         this.estudiosCollection = estudiosCollection;

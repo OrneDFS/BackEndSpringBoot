@@ -23,7 +23,7 @@ public class ProyectosController {
     @Autowired
     private IProyectosService instancProyServ;
             
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/proyectos/agregar") 
     public void nuevoProyecto (@RequestBody Proyectos proye){
         instancProyServ.nuevoProyecto(proye);
@@ -33,13 +33,13 @@ public class ProyectosController {
     public Proyectos verProyecto(@PathVariable int id){
         return instancProyServ.verProyecto(id);
     }
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/proyectos/editar") 
     public void editarProyecto(@RequestBody Proyectos proye){
         instancProyServ.editarProyecto(proye);
     }
     
-    @PreAuthorize("hasRole('Admin')")    
+    @PreAuthorize("hasRole('ADMIN')")    
     @DeleteMapping ("/proyectos/eliminar/{id}") 
     public void eliminarProyecto (@PathVariable int id){
         instancProyServ.eliminarProyecto(id);

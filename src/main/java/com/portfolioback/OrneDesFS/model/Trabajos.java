@@ -39,11 +39,11 @@ public class Trabajos implements Serializable {
     @Column(name = "Puesto")
     private String puesto;
     
-    @Column(name = "Descripcion")
+    @Column(name = "descripcion")
     private String descripcion;
     
-    @Column(name = "Url_empresa")
-    private String urlempresa;
+    @Column(name = "Url_Logo_empresa")
+    private String urlLogoEmpresa;
     
     @JoinColumn(name = "persona_id_Persona", referencedColumnName = "id")
     
@@ -54,13 +54,13 @@ public class Trabajos implements Serializable {
     public Trabajos() {
     }
 
-    public Trabajos(Integer idTrabajos, String empresa, String periodo, String puesto, String descripcion, String urlempresa, Persona persona) {
+    public Trabajos(Integer idTrabajos, String empresa, String periodo, String puesto, String descripcion, String urlLogoEmpresa, Persona persona) {
         this.idTrabajos = idTrabajos;
         this.empresa = empresa;
         this.periodo = periodo;
         this.puesto = puesto;
         this.descripcion = descripcion;
-        this.urlempresa = urlempresa;
+        this.urlLogoEmpresa = urlLogoEmpresa;
         this.persona = persona;
     }
 
@@ -104,12 +104,12 @@ public class Trabajos implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public String getUrlempresa() {
-        return urlempresa;
+    public String getUrlLogoEmpresa() {
+        return urlLogoEmpresa;
     }
 
-    public void setUrlempresa(String urlempresa) {
-        this.urlempresa = urlempresa;
+    public void setUrlLogoEmpresa(String urlLogoEmpresa) {
+        this.urlLogoEmpresa = urlLogoEmpresa;
     }
 
     public Persona getPersona() {

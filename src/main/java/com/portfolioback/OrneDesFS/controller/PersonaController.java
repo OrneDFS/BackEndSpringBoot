@@ -28,18 +28,18 @@ public class PersonaController {
         return instancPersoServ.verPersona(id);
     }
     
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/persona/agregar") 
-    public void nuevaPersona (@RequestBody Persona per){//pers o per?
+    public void nuevaPersona (@RequestBody Persona per){
         instancPersoServ.nuevaPersona(per);
     }   
   
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @PutMapping ("/persona/editar") 
-    public void editarPersona(@RequestBody Persona pers){ //pers o per?
+    public void editarPersona(@RequestBody Persona pers){ 
         instancPersoServ.editarPersona(pers);
     }
-    @PreAuthorize("hasRole('Admin')")
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping ("/persona/eliminar/{id}") 
     public void eliminarPersona (@PathVariable int id){
         instancPersoServ.eliminarPersona(id);
@@ -48,7 +48,7 @@ public class PersonaController {
     //Lista de personas//
     @GetMapping ("/persona/ver") 
     @ResponseBody
-        public List <Persona> verPersonas(){ //verPersonasssss o persona?
+        public List <Persona> verPersonas(){ 
         return instancPersoServ.verListaPersonas();
         }
 }
